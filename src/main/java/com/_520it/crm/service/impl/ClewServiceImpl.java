@@ -58,7 +58,6 @@ public class ClewServiceImpl implements IClewService {
 
     @Override
     public void luceneWriteIndex() {
-        System.out.println("同步数据库中的数据");
         // 查出所有
         List<Clew> clews = dao.selectAll();
         IndexWriter writer = null;
@@ -74,7 +73,6 @@ public class ClewServiceImpl implements IClewService {
             //----------------------------
             //删除之前的在lucene仓库中的数据
             int i1 = writer.numDocs();
-            System.out.println("i1 = " + i1);
             writer.deleteAll();
             //----------------------------
 

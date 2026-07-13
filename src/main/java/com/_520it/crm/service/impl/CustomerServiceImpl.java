@@ -89,11 +89,6 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerTransfer customerTransfer = new CustomerTransfer();
         BeanUtils.copyProperties(req, customerTransfer);
         customerTransfer.setTranstime(new Date());
-        // customerTransfer.setTransreason(req.getTransReason());
-        // customerTransfer.setCustomerId(req.getCustomerId());
-        // customerTransfer.setTransUserId(req.getTransUserId());
-        // customerTransfer.setOldSellerId(req.getOldSellerId());
-        // customerTransfer.setNewSellerId(req.getNewSellerId());
         customerTransferDao.insert(customerTransfer);
     }
 

@@ -94,7 +94,6 @@ public class ClewController extends BaseController {
     public Map<String, Object> getContentById(Long id, HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");
         String content = clewService.getContentById(id);
-        System.out.println("content = " + content);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("content", content);
         return map;

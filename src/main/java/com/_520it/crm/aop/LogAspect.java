@@ -12,10 +12,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
-import sun.misc.ProxyGenerator;
-
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -105,21 +103,6 @@ public class LogAspect {
 			e.printStackTrace();
 		}
 		logService.insert(log);
-	}
-
-	/**
-	 * 用来生成service的代理类
-	 * 
-	 * @param clazz
-	 */
-	public void outputProsyClass(Class clazz) {
-		byte[] bytes = ProxyGenerator.generateProxyClass("$Proxy", new Class[] {clazz});
-		try (FileOutputStream fos = new FileOutputStream(new File("D:/$Proxy.class"))) {
-			fos.write(bytes);
-			fos.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }

@@ -28,128 +28,26 @@
             <result column="realname" property="realname"/>
         </association>
     </resultMap>
+
+    <!-- 统一字段列表：input/inchart 为 join 表别名，columnPrefix 对齐 BaseResultMap -->
     <sql id="fieldSql">
         c.id
         , c.name, c.age, c.gender, c.tel, c.email, c.qq, c.wechat, c.job, c.salaryLevel, c.customerSource,
         c.inputTime, c.status, c.becomeTime, c.inputUser_id, c.inChargeUser_id,
-        input.id as inputuser_id, input.username as inputuser_username,input.realname as inputuser_realname,
-        inchart.id as inchargeuser_id,inchart.username as inchargeuser_username,inchart.realname as inchargeuser_realname
+        input.id as inputuser_id, input.username as inputuser_username, input.realname as inputuser_realname,
+        inchart.id as inchargeuser_id, inchart.username as inchargeuser_username, inchart.realname as inchargeuser_realname
     </sql>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete
-        from customer
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
-    <insert id="insert" parameterType="com._520it.crm.domain.Customer" useGeneratedKeys="true" keyProperty="id">
-        insert
-        into customer (name, age, gender,
-                       tel, email, qq, wechat,
-                       job, salarylevel, customersource,
-                       inchargeuser_id,
-                       inputuser_id, inputtime,
-                       status, becometime)
-        values (#{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
-                #{gender,jdbcType=BIT},
-                #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR},
-                #{wechat,jdbcType=VARCHAR},
-                #{job,jdbcType=VARCHAR}, #{salarylevel,jdbcType=VARCHAR},
-                #{customersource,jdbcType=VARCHAR},
-                #{inchargeuser.id,jdbcType=BIGINT}, #{inputuser.id,jdbcType=BIGINT},
-                #{inputtime,jdbcType=TIMESTAMP},
-                0, #{becometime,jdbcType=TIMESTAMP})
-    </insert>
-
-    <update id="updateByPrimaryKey" parameterType="com._520it.crm.domain.Customer">
-        update customer
-        set name           = #{name,jdbcType=VARCHAR},
-            age            =
-                #{age,jdbcType=INTEGER},
-            gender         = #{gender,jdbcType=BIT},
-            tel            = #{tel,jdbcType=VARCHAR},
-            email          =
-                #{email,jdbcType=VARCHAR},
-            qq             = #{qq,jdbcType=VARCHAR},
-            wechat         = #{wechat,jdbcType=VARCHAR},
-            job            =
-                #{job,jdbcType=VARCHAR},
-            salarylevel    = #{salarylevel,jdbcType=VARCHAR},
-            customersource =
-                #{customersource,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-
-    <update id="updateStatusById">
-        update customer set status=#{status}
-        <if test="status == 1">
-            ,becometime = now()
-        </if>
-        where id=#{id}
-    </update>
-
-    <update id="updateInChargerUser">
-        update customer set inchargeuser_id = #{newSellerId} where id = #{customerId}
-    </update>
-
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-        select id,
-               name,
-               age,
-               gender,
-               tel,
-               email,
-               qq,
-               wechat,
-               job,
-               salarylevel,
-               customersource,
-               inchargeuser_id,
-               inputuser_id,
-               inputtime,
-               status,
-               becometime
-        from customer
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select id,
-               name,
-               age,
-               gender,
-               tel,
-               email,
-               qq,
-               wechat,
-               job,
-               salarylevel,
-               customersource,
-               inchargeuser_id,
-               inputuser_id,
-               inputtime,
-               status,
-               becometime
-        from customer
-    </select>
-
-    <sql id="field_sql">
-        c
-        .
-        id
-        ,c.name,c.age,c.gender,c.tel,c.email,c.qq,c.wechat,c.job,c.salarylevel,c.customersource,c.inputtime,c.status,c.becometime,
-		c.inchargeuser_id,incharge.username inchargeuser_username,
-		c.inputuser_id,inputuser.username inputuser_username
+    <sql id="tableSql">
+        from customer c
+        left join employee input on c.inputuser_id = input.id
+        left join employee inchart on inchart.id = c.inchargeuser_id
     </sql>
 
-    <sql id="table_sql">
-        from
-		customer c
-		LEFT JOIN employee inputuser on c.inputuser_id = inputuser.id
-		left join employee incharge on incharge.id=c.inchargeuser_id
-    </sql>
-
-    <sql id="condition_sql">
-        <if test="keyword !=null and keyword != ''">
-            and (c.name like concat("%",#{keyword},"%") or c.tel like concat("%",#{keyword},"%"))
+    <!-- 统一条件：keyword + status（含 choose 逻辑，支持 status=3/4 组合查询） -->
+    <sql id="conditionSql">
+        <if test="keyword != null and keyword != ''">
+            and (c.name like concat('%', #{keyword}, '%') or c.tel like concat('%', #{keyword}, '%'))
         </if>
         <if test="status != null">
             <choose>
@@ -166,181 +64,160 @@
         </if>
     </sql>
 
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from customer where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com._520it.crm.domain.Customer" useGeneratedKeys="true" keyProperty="id">
+        insert into customer (name, age, gender, tel, email, qq, wechat,
+                              job, salarylevel, customersource, inchargeuser_id,
+                              inputuser_id, inputtime, status, becometime)
+        values (#{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+                #{gender,jdbcType=BIT}, #{tel,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR},
+                #{wechat,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR},
+                #{salarylevel,jdbcType=VARCHAR}, #{customersource,jdbcType=VARCHAR},
+                #{inchargeuser.id,jdbcType=BIGINT}, #{inputuser.id,jdbcType=BIGINT},
+                #{inputtime,jdbcType=TIMESTAMP}, 0, #{becometime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com._520it.crm.domain.Customer">
+        update customer
+        set name           = #{name,jdbcType=VARCHAR},
+            age            = #{age,jdbcType=INTEGER},
+            gender         = #{gender,jdbcType=BIT},
+            tel            = #{tel,jdbcType=VARCHAR},
+            email          = #{email,jdbcType=VARCHAR},
+            qq             = #{qq,jdbcType=VARCHAR},
+            wechat         = #{wechat,jdbcType=VARCHAR},
+            job            = #{job,jdbcType=VARCHAR},
+            salarylevel    = #{salarylevel,jdbcType=VARCHAR},
+            customersource = #{customersource,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateStatusById">
+        update customer set status = #{status}
+        <if test="status == 1">, becometime = now()</if>
+        where id = #{id}
+    </update>
+
+    <update id="updateInChargerUser">
+        update customer set inchargeuser_id = #{newSellerId} where id = #{customerId}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select id, name, age, gender, tel, email, qq, wechat, job,
+               salarylevel, customersource, inchargeuser_id, inputuser_id,
+               inputtime, status, becometime
+        from customer
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, name, age, gender, tel, email, qq, wechat, job,
+               salarylevel, customersource, inchargeuser_id, inputuser_id,
+               inputtime, status, becometime
+        from customer
+    </select>
+
     <select id="queryCount" resultType="long">
         select count(*)
-        <include refid="table_sql"/>
+        <include refid="tableSql"/>
         <where>
-            <include refid="condition_sql"/>
-            <if test="userId!=null">
+            <include refid="conditionSql"/>
+            <if test="userId != null">
                 and c.inChargeUser_id = #{userId}
             </if>
         </where>
     </select>
 
     <select id="queryForPage" resultMap="BaseResultMap">
-        select
-        <include refid="field_sql"/>
-        <include refid="table_sql"/>
+        select <include refid="fieldSql"/>
+        <include refid="tableSql"/>
         <where>
-            <include refid="condition_sql"/>
-            <if test="userId!=null">
+            <include refid="conditionSql"/>
+            <if test="userId != null">
                 and c.inChargeUser_id = #{userId}
             </if>
             order by c.inputtime desc
-            <if test="page!=null">
-                limit #{start},#{rows}
+            <if test="page != null">
+                limit #{start}, #{rows}
             </if>
         </where>
-    </select>
-
-    <select id="queryFormalCustomerCount" resultType="long">
-        select count(*)
-        <include refid="table_sql"/>
-        where c.status = 1
-    </select>
-
-    <select id="queryFormalCustomer" resultMap="BaseResultMap">
-        select
-        <include refid="field_sql"/>
-        <include refid="table_sql"/>
-        where c.status = 1
-        <if test="page != null">
-            limit #{start},#{rows}
-        </if>
     </select>
 
     <update id="updateByChargeId">
         update customer
         set inChargeUser_id = #{inchargeId}
-        where id = #{id};
+        where id = #{id}
     </update>
 
     <update id="customerAdmit">
         update customer
-        set status         = 1,
-            inChargeUser_id=#{inchargeId}
+        set status = 1, inChargeUser_id = #{inchargeId}
         where id = #{id}
     </update>
 
     <update id="moveToResourcePool">
         update customer
-        set status         = 2,
-            inChargeUser_id=#{inchargeId}
+        set status = 2, inChargeUser_id = #{inchargeId}
         where id = #{id}
     </update>
 
     <update id="lostCustomer">
         update customer
-        set status         = -2,
-            inChargeUser_id=#{inchargeId}
+        set status = -2, inChargeUser_id = #{inchargeId}
         where id = #{id}
     </update>
 
     <update id="updateStatusFalseById">
-        update customer
-        set status = -1
-        where id = #{id}
+        update customer set status = -1 where id = #{id}
     </update>
 
-    <select id="queryResourcePoolByConditionCount" resultType="long">
-        select count(*) from customer c
-        left join employee input on c.inputUser_id = input.id
-        left join employee inchart on c.inChargeUser_id = inchart.id
-        <where>
-            <if test="userId != null">
-                AND inChargeUser_id =#{userId}
-            </if>
-            <if test="status == null">
-                AND c.status = 2
-            </if>
-        </where>
-    </select>
-    <select id="queryResourcePoolByCondition" resultMap="BaseResultMap">
-        select
-        <include refid="fieldSql"/>
-        from customer c
-        left join employee input on c.inputUser_id = input.id
-        left join employee inchart on c.inChargeUser_id = inchart.id
-
-        <where>
-            <if test="userId != null">
-                AND inChargeUser_id =#{userId}
-            </if>
-            <if test="status ==null">
-                AND c.status = 2
-            </if>
-            <include refid="conditionSql"/>
-            order by c.inputTime DESC
-            <if test="page !=null">
-                limit #{start},#{rows}
-            </if>
-        </where>
-    </select>
     <select id="selectAllCount" resultType="long">
         select count(*)
-        from customer c
-                 left join employee input
-        on c.inputUser_id = input.id
-            left join employee inchart on c.inChargeUser_id = inchart.id
+        <include refid="tableSql"/>
     </select>
 
     <select id="queryByConditionCount" resultType="long">
-        select count(*) from customer c
-        left join employee input on c.inputUser_id = input.id
-        left join employee inchart on c.inChargeUser_id = inchart.id
+        select count(*)
+        <include refid="tableSql"/>
         <where>
+            <include refid="conditionSql"/>
             <if test="userId != null">
-                AND inChargeUser_id =#{userId}
+                and c.inChargeUser_id = #{userId}
             </if>
             <if test="status == null">
-                AND c.status = 0
+                and c.status = 0
             </if>
         </where>
     </select>
 
-    <sql id="conditionSql">
-        <if test="keyword != null">
-            AND (c.name like concat('%',#{keyword},'%') OR c.tel like concat('%',#{keyword},'%'))
-        </if>
-        <if test="status !=null">
-            AND c.status = #{status}
-        </if>
-    </sql>
-
-
     <select id="queryByCondition" resultMap="BaseResultMap">
-        select
-        <include refid="fieldSql"/>
-        from customer c
-        left join employee input on c.inputUser_id = input.id
-        left join employee inchart on c.inChargeUser_id = inchart.id
+        select <include refid="fieldSql"/>
+        <include refid="tableSql"/>
         <where>
+            <include refid="conditionSql"/>
             <if test="userId != null">
-                AND inChargeUser_id =#{userId}
-            </if>
-            <if test="status != null">
-                AND c.status = #{status}
+                and c.inChargeUser_id = #{userId}
             </if>
             <if test="status == null">
                 and c.status in (-1, 0)
             </if>
-            <include refid="conditionSql"/>
-            order by c.inputTime DESC
-            <if test="page !=null">
-                limit #{start},#{rows}
+            order by c.inputTime desc
+            <if test="page != null">
+                limit #{start}, #{rows}
             </if>
         </where>
-
     </select>
+
     <select id="listAllFormalCustomer" resultMap="BaseResultMap">
-        select
-        <include refid="fieldSql"/>
-        from customer c
-        left join employee input on c.inputUser_id = input.id
-        left join employee inchart on c.inChargeUser_id = inchart.id
+        select <include refid="fieldSql"/>
+        <include refid="tableSql"/>
         where c.status = 1
         <if test="userId != null">
-            AND c.inChargeUser_id =#{userId}
+            and c.inChargeUser_id = #{userId}
         </if>
     </select>
 </mapper>

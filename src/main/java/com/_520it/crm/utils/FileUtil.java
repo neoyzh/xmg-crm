@@ -34,7 +34,6 @@ public class FileUtil {
 
             in = multipartFile.getInputStream();
             String realpath= UserContext.get().getSession().getServletContext().getRealPath("/netdisk");
-            System.out.println(realpath);
             String originalname=multipartFile.getOriginalFilename();
             String filetype=getExt(originalname);
              filename= UUID.randomUUID().toString()+"."+filetype;
@@ -86,12 +85,7 @@ public class FileUtil {
     }
 
     public static InputStream getDownloadStream(String path) {
-        System.out.println("path = " + path);
-        System.out.println(UserContext.get().getSession().getServletContext().getRealPath("/netdisk"));
         String absParentPath= UserContext.get().getSession().getServletContext().getRealPath(path);
-        //System.out.println("UserContext.getLocalRequest().getSession().getServletContext() = " + UserContext.getLocalRequest().getSession().getServletContext());
-        System.out.println("absParentPath = " + absParentPath);
-        System.out.println("=========================");
         FileInputStream fileInputStream=null;
         try {
             fileInputStream = new FileInputStream(absParentPath);

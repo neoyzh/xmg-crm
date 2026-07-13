@@ -48,7 +48,7 @@ public class EmployeeController {
     public AjaxResult save(Employee employee) {
         AjaxResult result = AjaxResult.createResponse();
         try {
-            employee.setPassword(EncryptHelper.md5("123456"));
+            employee.setPassword(EncryptHelper.md5(EncryptHelper.getRandomPassword()));
             employee.setState(true);
             employee.setAdmin(false);
             employeeService.insert(employee);

@@ -52,12 +52,6 @@ public class ContractController extends BaseController {
     @RequestMapping("/contract_save")
     @ResponseBody
     public AjaxResult save(Contract contract, MultipartFile pic, HttpServletRequest request) {
-        System.out.println("===============");
-        System.out.println(pic.getSize());
-        System.out.println(pic.getName());
-        System.out.println(pic.getContentType());
-        System.out.println(pic.getOriginalFilename());
-        System.out.println("===============");
 
         String filePath = mulipartFileUpload(pic, request);
         AjaxResult result = null;

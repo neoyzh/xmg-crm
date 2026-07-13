@@ -54,34 +54,16 @@ public class TaskController {
         PageResult result = null;
         try {
             result = taskService.selectByCondition(qo);
-            System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    /*@RequestMapping("/task_listAll")
-    @ResponseBody
-    public List<Task> listAll(TaskQueryObject qo) {
-        PageResult result = null;
-        try {
-            result = taskService.selectByCondition(qo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result.getRows();
-    }*/
-
-
     @RequestMapping("/task_save")
     @ResponseBody
     @RequiredPermission("今日计划分配")
     public AjaxResult save(Task task) {
-        System.out.println("task.getTitle()" + task.getTitle());
-        System.out.println(task.getRemark());
-        System.out.println(task.getMinhandledescribe());
-        System.out.println("task.getMintaskdescribe()" + task.getMintaskdescribe());
         AjaxResult result = null;
         try {
             task.setStatus(0);
@@ -297,7 +279,6 @@ public class TaskController {
     @RequestMapping("/task_delAll")
     @ResponseBody
     public AjaxResult deleteAll(Long[] ids) {
-        System.out.println(Arrays.toString(ids));
         AjaxResult result = null;
         try {
             if (ids != null) {

@@ -36,7 +36,7 @@ public class CheckInServiceImpl implements ICheckInService {
 
     @Override
     public CheckIn get(Long id) {
-        return null;
+        return dao.selectByPrimaryKey(id);
     }
 
     @Override

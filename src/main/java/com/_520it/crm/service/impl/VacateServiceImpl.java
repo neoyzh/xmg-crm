@@ -89,8 +89,6 @@ public class VacateServiceImpl implements IVacateService {
      */
     @Override
     public int audit(Vacate vacate) {
-        System.out.println(vacate);
-        System.out.println(vacate.getId());
         Vacate v = dao.selectByPrimaryKey(vacate.getId());
         if (v.getState() == Vacate.AUDIT) {
             return 0;

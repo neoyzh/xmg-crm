@@ -65,12 +65,10 @@ public class NetworkDiskController {
             String type = FileUtil.getExt(ofname);
             networkDisk.setType(type);
             networkDisk.setPub(false);
-            System.out.println(mf.getContentType());
             Employee user = (Employee)session.getAttribute(UserContext.USER_IN_SESSION);
             networkDisk.setUser(user);
             String path = FileUtil.upload(mf);
             networkDisk.setPath(path);
-            System.out.println("NetworkDisk = " + networkDisk);
             networkDiskService.save(networkDisk);
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,13 +121,11 @@ public class NetworkDiskController {
 
     @RequestMapping("/netdisk_download")
     public ModelAndView download(HttpServletResponse resp, Long id) {
-        System.out.println("FileController.download");
         NetworkDisk networkDisk = networkDiskService.get(id);
         if (!networkDisk.isDir()) {
             OutputStream out = null;
             InputStream in = null;
             try {
-                System.out.println(networkDisk.getName());
                 //resp.setCharacterEncoding("utf-8");
                 resp.addHeader("Content-Disposition",
                     "attachment;filename=" + new String(networkDisk.getName().getBytes("utf-8"), "iso-8859-1"));
