@@ -133,9 +133,12 @@
         <include refid="filesql"/>
         from checkIn c left join employee e on e.id = c.employee_id left join employee ee on ee.id = c.checkman_id
         where e.id = #{id}
-        <!--  <if test=" page != null">
-             limit #{start},#{rows};
-         </if> -->
+    </select>
+
+    <select id="countTodayByEmployeeId" resultType="int">
+        select count(*) from checkin
+        where employee_id = #{employeeId}
+        and (date(signInTime) = #{today} or date(signOutTime) = #{today})
     </select>
 
 </mapper>

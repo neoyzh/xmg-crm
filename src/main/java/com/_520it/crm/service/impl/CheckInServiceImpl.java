@@ -75,37 +75,14 @@ public class CheckInServiceImpl implements ICheckInService {
     public int signIn(CheckIn checkIn, Long id) {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        // 当前签到时间
         String dateNowStr = sdf.format(date);
-        // 获取历史的所有签到记录，判断当天是否有签到记录
-        List<CheckIn> listCheckIn = dao.queryCheckInByEid(id);
-        /*
-            如果已经签到过，则不能再签到
-            如果已经签退过，则不能再签到
-         */
-        for (CheckIn c : listCheckIn) {
-            // 获取历史签到记录
-            Date signInDate = c.getSignintime();
-            if (signInDate != null) {
-                String dateStr = sdf.format(signInDate);
-                // 相等说明已经签到了
-                if (dateStr.equals(dateNowStr)) {
-                    return 0;
-                }
-            } else {
-                Date signOutDate = c.getSignouttime();
-                if (signOutDate != null) {
-                    String dateStr = sdf.format(signOutDate);
-                    if (dateStr.equals(dateNowStr)) {
-                        return 0;
-                    }
-                }
-            }
+
+        if (dao.countTodayByEmployeeId(id, dateNowStr) > 0) {
+            return 0;
         }
+
         checkIn.setSignintime(date);
-        // 判断是是否晚签或早退
         int result = CheckInUtils.checkSignInTime(date);
-        // 当前时间和比较的时间早
         if (result == -1) {
             checkIn.setState(CheckIn.SIGNSTATE_NORMAL);
         } else {

@@ -29,4 +29,9 @@ public interface CheckInMapper {
      * @return
      */
     List<CheckIn> queryCheckInByEid(Long id);
+
+    /**
+     * 查询员工当天是否有签到/签退记录
+     */
+    int countTodayByEmployeeId(@Param("employeeId") Long employeeId, @Param("today") String today);
 }

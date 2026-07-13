@@ -102,8 +102,7 @@ public class PermissionUtils {
                 // 如果用户没有该权限，从菜单列表中移除该菜单
                 if (!userPermissions.contains(menu.getFunction())) {
                     menuList.remove(i);
-                    // list集合删除索引会更新，处理NullPointerException，这里回顾一下为什么不可以用for
-                    // i--;
+                    // 逆向遍历删除元素是安全的：删除索引 i 只会影响索引大于 i 的元素，不会影响尚未访问的前面元素
                 }
             }
             // else 菜单权限表单式为空，说明该菜单不需要校验，任何用户都能访问
