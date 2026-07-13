@@ -204,20 +204,76 @@ public class TaskController {
         return result;
     }
 
+    /**
+     * 批量完成任务：在7天内且状态为未完成(0)的任务才允许标记完成，超出限制的跳过。
+     */
     @RequestMapping("/task_complateAll")
     @ResponseBody
-    public AjaxResult complateAll(Long[] var1) {
-        throw new Error("Unresolved compilation problems: \n\tType mismatch: cannot convert from ArrayList<?> to " +
-                "List<String>\n\tCannot instantiate the type ArrayList<?>\n\tSyntax error on token \"<\", ? expected " +
-                "after this token\n");
+    public AjaxResult complateAll(Long[] cIds) {
+        int success = 0;
+        int skipped = 0;
+        try {
+            if (cIds != null) {
+                for (Long id : cIds) {
+                    Task e = (Task) this.taskService.get(id);
+                    if (e == null || e.getStatus() != 0) {
+                        skipped++;
+                        continue;
+                    }
+                    long day = (System.currentTimeMillis() - e.getStart().getTime()) / 86400000L;
+                    if (day >= 7L) {
+                        skipped++;
+                        continue;
+                    }
+                    e.setStatus(1);
+                    this.taskService.update(e);
+                    success++;
+                }
+            }
+            String msg = skipped > 0
+                ? "成功设置" + success + "条,跳过" + skipped + "条(已标注或超过7天)"
+                : "设置成功";
+            return new AjaxResult(true, msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new AjaxResult("发生异常了,请联系管理员!");
+        }
     }
 
+    /**
+     * 批量标记失败：在7天内且状态为未完成(0)的任务才允许标记失败，超出限制的跳过。
+     */
     @RequestMapping("/task_loseAll")
     @ResponseBody
-    public AjaxResult loseAll(Long[] var1) {
-        throw new Error("Unresolved compilation problems: \n\tType mismatch: cannot convert from ArrayList<?> to " +
-                "List<String>\n\tCannot instantiate the type ArrayList<?>\n\tSyntax error on token \"<\", ? expected " +
-                "after this token\n");
+    public AjaxResult loseAll(Long[] lIds) {
+        int success = 0;
+        int skipped = 0;
+        try {
+            if (lIds != null) {
+                for (Long id : lIds) {
+                    Task e = (Task) this.taskService.get(id);
+                    if (e == null || e.getStatus() != 0) {
+                        skipped++;
+                        continue;
+                    }
+                    long day = (System.currentTimeMillis() - e.getStart().getTime()) / 86400000L;
+                    if (day >= 7L) {
+                        skipped++;
+                        continue;
+                    }
+                    e.setStatus(2);
+                    this.taskService.update(e);
+                    success++;
+                }
+            }
+            String msg = skipped > 0
+                ? "成功设置" + success + "条,跳过" + skipped + "条(已标注或超过7天)"
+                : "设置成功";
+            return new AjaxResult(true, msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new AjaxResult("发生异常了,请联系管理员!");
+        }
     }
 
     @RequestMapping("/task_del")
@@ -241,7 +297,6 @@ public class TaskController {
     @RequestMapping("/task_delAll")
     @ResponseBody
     public AjaxResult deleteAll(Long[] ids) {
-
         System.out.println(Arrays.toString(ids));
         AjaxResult result = null;
         try {

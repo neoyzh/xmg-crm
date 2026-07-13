@@ -12,9 +12,9 @@
   </resultMap>
 
   <resultMap id="CustomerChartVoMap" type="com._520it.crm.resp.vo.CustomerChartVo">
-    <result column="" property="time" jdbcType="VARCHAR"/>
-    <result column="" property="employeeName" jdbcType="VARCHAR"/>
-    <result column="" property="incrCount" jdbcType="Integer"/>
+    <result column="time" property="time" jdbcType="VARCHAR"/>
+    <result column="employeeName" property="employeeName" jdbcType="VARCHAR"/>
+    <result column="incrCount" property="incrCount" jdbcType="INTEGER"/>
   </resultMap>
 
   <resultMap id="CustomerVoMap" type="com._520it.crm.domain.CustomerVO" >
@@ -71,22 +71,22 @@
   </sql>
 
   <select id="queryByConditionCount" resultType="long">
-    SELECT count(*) from customer c  LEFT JOIN employee e on c.inChargeUser_id=e.id
-    <include refid="conditionSql"/>
+    SELECT count(*) FROM (
+      select e.username as employeeName
+      from customer c LEFT JOIN employee e on c.inChargeUser_id = e.id
+      <include refid="conditionSql"/>
+      <include refid="sss"/>
+    ) t
   </select>
 
-  <select id="queryByCondition" resultMap="BaseResultMap">
-    select <include refid="aaa"/>, c.id as employee_id from
-
-    select <include refid="aaa"/>, count(c.name) as amountCustomer,c.name,c.becometime,
-    e.username as employee_name,e.id as employee_id
-    from customer c LEFT JOIN employee e on c.inChargeUser_id=e.id
+  <select id="queryByCondition" resultMap="CustomerChartVoMap">
+    select <include refid="aaa"/>, e.username as employeeName, count(c.id) as incrCount
+    from customer c LEFT JOIN employee e on c.inChargeUser_id = e.id
     <include refid="conditionSql"/>
     <include refid="sss"/>
     <if test="page!=null">
       limit #{start},#{rows}
     </if>
-
   </select>
 
   <select id="selectTimeYear" resultType="String">
