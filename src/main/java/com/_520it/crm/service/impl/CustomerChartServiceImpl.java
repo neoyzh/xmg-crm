@@ -1,11 +1,11 @@
 package com._520it.crm.service.impl;
 
-import com._520it.crm.domain.Customer;
 import com._520it.crm.domain.CustomerVO;
 import com._520it.crm.mapper.CustomerChartMapper;
 import com._520it.crm.req.CustomerChartQueryObject;
 import com._520it.crm.req.PageReq;
 import com._520it.crm.resp.PageResult;
+import com._520it.crm.resp.vo.CustomerChartVo;
 import com._520it.crm.service.ICustomerChartService;
 import com._520it.crm.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class CustomerChartServiceImpl implements ICustomerChartService {
         }
         Long count = dao.queryByConditionCount(qo);
         if (count > 0) {
-            List<Customer> result = dao.queryByCondition(qo);
+            List<CustomerChartVo> result = dao.queryByCondition(qo);
             return new PageResult(count, result);
         } else {
             return PageResult.EMPTY;

@@ -55,8 +55,6 @@ public interface CustomerMapper {
 
     int updateStatusFalseById(Long id);
 
-    int updateStatusSuccessById(Long id);
-
     List<Customer> listAllFormalCustomer();
 
 }

@@ -115,20 +115,6 @@ public class CustomerController {
         return result;
     }
 
-    @RequestMapping("/customer_become")
-    @ResponseBody
-    public AjaxResult become(Long id) {
-        AjaxResult result = null;
-        try {
-            customerService.updateStatusById(id, 1);
-            result = new AjaxResult(true, "转正成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = new AjaxResult("警告，请联系管理员");
-        }
-        return result;
-    }
-
     /**
      * 移交&共享
      */

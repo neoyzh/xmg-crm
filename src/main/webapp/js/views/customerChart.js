@@ -14,8 +14,8 @@ $(function () {
 
         columns: [[
             {title: "分组信息", field: "time", width: 1, align: "center", formatter: yearFormatter},
-            {title: "员工姓名", field: "employee", width: 1, align: "center", formatter: employeeFormatter},
-            {title: "潜在客户新增数量", field: "amountCustomer", width: 1, align: "center"}
+            {title: "员工姓名", field: "employeeName", width: 1, align: "center"},
+            {title: "潜在客户新增数量", field: "incrCount", width: 1, align: "center"}
         ]],
         fitColumns: true,
         toolbar: '#customerChart_datagrid_bt'
@@ -56,8 +56,8 @@ $(function () {
                 singleSelect: true,
                 columns: [[
                     {title: "分组信息", field: "time", width: 1, align: "center", formatter: allFormatter},
-                    {title: "员工姓名", field: "employee", width: 1, align: "center", formatter: employeeFormatter},
-                    {title: "潜在客户新增数量", field: "amountCustomer", width: 1, align: "center"}
+                    {title: "员工姓名", field: "employeeName", width: 1, align: "center", formatter: employeeFormatter},
+                    {title: "潜在客户新增数量", field: "incrCount", width: 1, align: "center"}
                 ]],
                 fitColumns: true,
                 toolbar: '#customer_datagrid_bt'

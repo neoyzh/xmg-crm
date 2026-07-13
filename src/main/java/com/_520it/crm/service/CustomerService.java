@@ -53,8 +53,6 @@ public interface CustomerService {
 
 	int updateStatusFalseById(Long id);
 
-	int updateStatusSuccessById(Long id);
-
     boolean shareOrTransfer(Customer c, Long inchargeId, String reason);
 
 	boolean moveToResourcePool(Long id, Long id1);

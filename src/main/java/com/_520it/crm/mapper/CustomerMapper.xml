@@ -215,12 +215,6 @@
         where id = #{id};
     </update>
 
-    <update id="updateStatusSuccessById">
-        update customer
-        set status = 1
-        where id = #{id}
-    </update>
-
     <update id="customerAdmit">
         update customer
         set status         = 1,

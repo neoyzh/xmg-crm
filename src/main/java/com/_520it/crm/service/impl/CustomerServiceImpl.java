@@ -124,11 +124,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public int updateStatusSuccessById(Long id) {
-        return customerDao.updateStatusSuccessById(id);
-    }
-
-    @Override
     public boolean shareOrTransfer(Customer c, Long inchargeId, String reason) {
         Employee employee = UserContext.getCurrentLoginEmployee(UserContext.USER_IN_SESSION, Employee.class);
         // 创建移交记录对象

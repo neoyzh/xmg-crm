@@ -35,7 +35,7 @@ public class PotentialCustomerController extends BaseController {
     private EmployeeService employeeService;
 
     @RequiredPermission("查看潜在客户")
-    @RequestMapping("/potentialCustomer")
+    @RequestMapping("/customerPotential")
     public String index() {
         return "customerPotential";
     }
@@ -65,12 +65,10 @@ public class PotentialCustomerController extends BaseController {
         return result;
     }
 
-
     @RequestMapping("/official_potentialCustomer_list")
     @ResponseBody
     public PageResult formalList(CustomerQueryObject qo) {
-        if (!PermissionUtils.checkPermission(
-            "com._520it.crm.web.controller.PotentialCustomerController:transfer")) {
+        if (!PermissionUtils.checkPermission("com._520it.crm.web.controller.PotentialCustomerController:transfer")) {
             //根据id查询
             Employee currentUser = UserContext.getCurrentLoginEmployee(UserContext.USER_IN_SESSION, Employee.class);
             qo.setUserId(currentUser.getId());
@@ -78,7 +76,6 @@ public class PotentialCustomerController extends BaseController {
         qo.setStatus(0);
         return customerService.queryForPage(qo);
     }
-
 
     /**
      * 添加潜在客户
@@ -186,13 +183,7 @@ public class PotentialCustomerController extends BaseController {
     public AjaxResult become(Long id) {
         AjaxResult result = AjaxResult.createResponse();
         try {
-            int effectCount = customerService.updateStatusSuccessById(id);
-
-            if (effectCount > 0) {
-                result = new AjaxResult(true, "操作成功");
-            } else {
-                result = new AjaxResult(true, "操作失败");
-            }
+            customerService.updateStatusById(id, 1);
         } catch (Exception e) {
             e.printStackTrace();
             result = new AjaxResult(true, "操作异常");
