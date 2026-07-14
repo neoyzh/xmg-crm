@@ -4,7 +4,10 @@ import com._520it.crm.domain.*;
 import com._520it.crm.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,18 +19,26 @@ import java.util.Objects;
  */
 @Component
 @Slf4j
-public class PermissionUtils {
+public class PermissionUtils implements ApplicationContextAware {
 
     private static PermissionService permissionService;
+    private static ApplicationContext applicationContext;
 
-    /**
-     * spring无法为static变量注入数据
-     * <p>
-     * 使用autowired作用在方法上，会调用一次该方法，如果方法中有参数，会对方法中的参数进行装配
-     */
     @Autowired
     public void setPermissionService(PermissionService permissionService) {
         PermissionUtils.permissionService = permissionService;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        PermissionUtils.applicationContext = applicationContext;
+    }
+
+    private static PermissionService getPermissionService() {
+        if (permissionService == null && applicationContext != null) {
+            permissionService = applicationContext.getBean(PermissionService.class);
+        }
+        return permissionService;
     }
 
     /**
@@ -49,7 +60,7 @@ public class PermissionUtils {
         // 2.先得到系统所有的权限
         if (CommonUtils.ALL_PERMISSIONS_RESOURCES.size() == 0) {
             // 从数据库中查询到所有的权限信息
-            List<Permission> allPermissions = permissionService.selectAll();
+            List<Permission> allPermissions = getPermissionService().selectAll();
             for (Permission p : allPermissions) {
                 CommonUtils.ALL_PERMISSIONS_RESOURCES.add(p.getResource());
             }

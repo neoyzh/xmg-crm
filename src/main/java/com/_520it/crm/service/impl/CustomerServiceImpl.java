@@ -9,8 +9,6 @@ import com._520it.crm.req.CustomerQueryObject;
 import com._520it.crm.req.TransferCustomerReq;
 import com._520it.crm.resp.PageResult;
 import com._520it.crm.service.CustomerService;
-import com._520it.crm.service.CustomerTransferService;
-import com._520it.crm.service.EmployeeService;
 import com._520it.crm.utils.UserContext;
 import jxl.Workbook;
 import jxl.write.Alignment;
@@ -35,10 +33,6 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerDao;
     @Autowired
     private CustomerTransferMapper customerTransferDao;
-    @Autowired
-    private EmployeeService employeeService;
-    @Autowired
-    private CustomerTransferService customerTransferService;
 
     @Override
     public int deleteByPrimaryKey(Long id) {
@@ -121,18 +115,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean shareOrTransfer(Customer c, Long inchargeId, String reason) {
         Employee employee = UserContext.getCurrentLoginEmployee(UserContext.USER_IN_SESSION, Employee.class);
-        // 创建移交记录对象
-        CustomerTransfer transfer = new CustomerTransfer();
-        transfer.setCustomer(c);
-        transfer.setOldseller(c.getInchargeuser());
-        transfer.setNewseller(employeeService.selectByPrimaryKey(inchargeId));
-        transfer.setTranstime(new Date());
-        transfer.setTransuser(employee);
-        transfer.setTransreason(reason);
-        // 创建移交记录
-        customerTransferService.save(transfer);
-        int effectCount = updateByChargeId(c.getId(), inchargeId);
-        return effectCount > 0;
+        TransferCustomerReq req = new TransferCustomerReq();
+        req.setCustomerId(c.getId());
+        req.setNewSellerId(inchargeId);
+        req.setOldSellerId(c.getInchargeuser().getId());
+        req.setTransUserId(employee.getId());
+        req.setTransReason(reason);
+        transfer(req);
+        return true;
     }
 
     @Override
