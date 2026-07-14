@@ -76,6 +76,16 @@
           and password = #{password}
     </select>
 
+    <select id="getEmployeeByUsername" resultMap="BaseResultMap">
+        select <include refid="field"/>
+        from employee
+        where username = #{username}
+    </select>
+
+    <update id="updatePassword">
+        update employee set password = #{password} where id = #{id}
+    </update>
+
     <sql id="wheresql">
         <where>
             <if test="keyword != null">

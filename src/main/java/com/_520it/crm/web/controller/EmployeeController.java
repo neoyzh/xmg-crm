@@ -48,7 +48,7 @@ public class EmployeeController {
     public AjaxResult save(Employee employee) {
         AjaxResult result = AjaxResult.createResponse();
         try {
-            employee.setPassword(EncryptHelper.md5(EncryptHelper.getRandomPassword()));
+            employee.setPassword(EncryptHelper.hashPassword(EncryptHelper.getRandomPassword()));
             employee.setState(true);
             employee.setAdmin(false);
             employeeService.insert(employee);
@@ -113,15 +113,19 @@ public class EmployeeController {
     @RequestMapping("/login")
     @ResponseBody
     public AjaxResult login(String username, String password, HttpServletRequest request) {
-        //拦截器对登录接口放行，由于aop日志需要从request获取信息，需要将当前线程请求的request存储
         UserContext.set(request);
         AjaxResult result = AjaxResult.createResponse();
-        String token = EncryptHelper.md5(password);
-        Employee currentUser = employeeService.getEmployeeForLogin(username, token);
-        if (Objects.isNull(currentUser)) {
+
+        Employee currentUser = employeeService.getEmployeeByUsername(username);
+        if (Objects.isNull(currentUser) || !EncryptHelper.verifyPassword(password, currentUser.getPassword())) {
             result.setSuccess(false);
             result.setMsg("账号或密码错误");
             return result;
+        }
+
+        // 透明迁移：旧 MD5 密码验证成功后自动升级为 SHA-256+salt
+        if (EncryptHelper.isLegacyHash(currentUser.getPassword())) {
+            employeeService.updatePassword(currentUser.getId(), EncryptHelper.hashPassword(password));
         }
 
         //1.存储用户信息到session中
@@ -133,7 +137,6 @@ public class EmployeeController {
 
         // 3.保存用户菜单权限到session中
         List<Menu> menus = menuService.queryForMenu();
-        // 先查询出所有的系统菜单，在根据用户的权限去除用户无权访问的菜单
         PermissionUtils.checkMenus(menus);
         request.getSession().setAttribute(UserContext.MENU_IN_SESSION, menus);
 

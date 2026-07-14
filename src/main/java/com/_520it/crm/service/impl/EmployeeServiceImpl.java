@@ -73,6 +73,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.getEmployeeForLogin(username, password);
     }
 
+    @Override
+    public Employee getEmployeeByUsername(String username) {
+        return employeeDao.getEmployeeByUsername(username);
+    }
+
+    @Override
+    public void updatePassword(Long id, String password) {
+        employeeDao.updatePassword(id, password);
+    }
+
     /**
      * 查询分页数据
      * <p>

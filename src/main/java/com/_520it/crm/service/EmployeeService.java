@@ -27,6 +27,10 @@ public interface EmployeeService {
 	 */
 	Employee getEmployeeForLogin(String username, String password);
 
+    Employee getEmployeeByUsername(String username);
+
+    void updatePassword(Long id, String password);
+
 	/**
 	 * @param queryObject
 	 * @return

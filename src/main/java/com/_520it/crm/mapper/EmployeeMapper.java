@@ -27,6 +27,12 @@ public interface EmployeeMapper {
 	 */
 	Employee getEmployeeForLogin(@Param("username") String username, @Param("password") String password);
 
+    /** 按用户名查询（密码校验在应用层完成） */
+    Employee getEmployeeByUsername(@Param("username") String username);
+
+    /** 更新密码 */
+    int updatePassword(@Param("id") Long id, @Param("password") String password);
+
 	/**
 	 * 查询分页记录数
 	 */
