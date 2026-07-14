@@ -6,7 +6,6 @@ import com._520it.crm.domain.Task;
 import com._520it.crm.req.TaskQueryObject;
 import com._520it.crm.resp.AjaxResult;
 import com._520it.crm.resp.PageResult;
-import com._520it.crm.service.DepartmentService;
 import com._520it.crm.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -30,9 +29,6 @@ public class TaskController {
 
     @Autowired
     private ITaskService taskService;
-
-    @Autowired
-    private DepartmentService departmentService;
 
     @RequestMapping("/task")
     public String index() {
@@ -136,58 +132,35 @@ public class TaskController {
     @RequestMapping("/task_complete")
     @ResponseBody
     public AjaxResult complete(Long cId) {
-        AjaxResult result = null;
         try {
-            Task e = (Task) this.taskService.get(cId);
-            Date date = e.getStart();
-            Long time = Long.valueOf(System.currentTimeMillis() - date.getTime());
-            long onedayTime = 86400000L;
-            long day = time.longValue() / onedayTime;
-            if (day >= 7L) {
-                result = new AjaxResult("这条记录的状态修改时间超过了限制!请在7天内操作!");
-            } else if (e.getStatus() == 0) {
-                e.setStatus(1);
-                this.taskService.update(e);
-                result = new AjaxResult(true, "设置成功");
-            } else {
-                result = new AjaxResult("这条记录还没有被完成哦!");
+            String error = taskService.completeTask(cId);
+            if (error != null) {
+                return new AjaxResult(error);
             }
+            return new AjaxResult(true, "设置成功");
         } catch (Exception e) {
             e.printStackTrace();
-            result = new AjaxResult("发生异常了,请联系管理员!");
+            return new AjaxResult("发生异常了,请联系管理员!");
         }
-
-        return result;
     }
 
     @RequestMapping("/task_lose")
     @ResponseBody
     public AjaxResult lose(Long lId) {
-        AjaxResult result = null;
         try {
-            Task e = (Task) this.taskService.get(lId);
-            Date date = e.getStart();
-            Long time = Long.valueOf(System.currentTimeMillis() - date.getTime());
-            long onedayTime = 86400000L;
-            long day = time.longValue() / onedayTime;
-            if (day >= 7L) {
-                result = new AjaxResult("这条记录的状态修改时间超过了限制!请在7天内操作!");
-            } else if (e.getStatus() == 0) {
-                e.setStatus(2);
-                this.taskService.update(e);
-                result = new AjaxResult(true, "设置成功");
-            } else {
-                result = new AjaxResult("这条记录还没有被完成哦!");
+            String error = taskService.loseTask(lId);
+            if (error != null) {
+                return new AjaxResult(error);
             }
+            return new AjaxResult(true, "设置成功");
         } catch (Exception e) {
             e.printStackTrace();
-            result = new AjaxResult("发生异常了,请联系管理员!");
+            return new AjaxResult("发生异常了,请联系管理员!");
         }
-        return result;
     }
 
     /**
-     * 批量完成任务：在7天内且状态为未完成(0)的任务才允许标记完成，超出限制的跳过。
+     * 批量完成任务
      */
     @RequestMapping("/task_complateAll")
     @ResponseBody
@@ -197,19 +170,11 @@ public class TaskController {
         try {
             if (cIds != null) {
                 for (Long id : cIds) {
-                    Task e = (Task) this.taskService.get(id);
-                    if (e == null || e.getStatus() != 0) {
+                    if (taskService.completeTask(id) != null) {
                         skipped++;
-                        continue;
+                    } else {
+                        success++;
                     }
-                    long day = (System.currentTimeMillis() - e.getStart().getTime()) / 86400000L;
-                    if (day >= 7L) {
-                        skipped++;
-                        continue;
-                    }
-                    e.setStatus(1);
-                    this.taskService.update(e);
-                    success++;
                 }
             }
             String msg = skipped > 0
@@ -223,7 +188,7 @@ public class TaskController {
     }
 
     /**
-     * 批量标记失败：在7天内且状态为未完成(0)的任务才允许标记失败，超出限制的跳过。
+     * 批量标记失败
      */
     @RequestMapping("/task_loseAll")
     @ResponseBody
@@ -233,19 +198,11 @@ public class TaskController {
         try {
             if (lIds != null) {
                 for (Long id : lIds) {
-                    Task e = (Task) this.taskService.get(id);
-                    if (e == null || e.getStatus() != 0) {
+                    if (taskService.loseTask(id) != null) {
                         skipped++;
-                        continue;
+                    } else {
+                        success++;
                     }
-                    long day = (System.currentTimeMillis() - e.getStart().getTime()) / 86400000L;
-                    if (day >= 7L) {
-                        skipped++;
-                        continue;
-                    }
-                    e.setStatus(2);
-                    this.taskService.update(e);
-                    success++;
                 }
             }
             String msg = skipped > 0

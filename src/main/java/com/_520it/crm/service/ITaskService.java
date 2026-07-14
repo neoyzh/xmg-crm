@@ -16,4 +16,16 @@ public interface ITaskService {
 	PageResult selectByCondition(TaskQueryObject qo);
 
     int change(Task todayTask);
+
+    /**
+     * 完成任务：7天内 + status=0 才能标记完成
+     * @return null=成功，非null=错误消息
+     */
+    String completeTask(Long id);
+
+    /**
+     * 标记失败：7天内 + status=0 才能标记失败
+     * @return null=成功，非null=错误消息
+     */
+    String loseTask(Long id);
 }
