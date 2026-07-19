@@ -2,6 +2,7 @@ package com._520it.crm.mapper;
 
 import com._520it.crm.domain.CheckIn;
 import com._520it.crm.req.PageReq;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

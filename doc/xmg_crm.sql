@@ -3,15 +3,15 @@
 
  Source Server         : local
  Source Server Type    : MySQL
- Source Server Version : 80016
+ Source Server Version : 80408
  Source Host           : localhost:3306
  Source Schema         : xmg_crm
 
  Target Server Type    : MySQL
- Target Server Version : 80016
+ Target Server Version : 80408
  File Encoding         : 65001
 
- Date: 10/09/2024 10:12:06
+ Date: 19/07/2026 22:18:19
 */
 
 SET NAMES utf8mb4;
@@ -22,15 +22,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `employee_id` bigint(20) NULL DEFAULT NULL,
-  `date` date NULL DEFAULT NULL,
-  `signinday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `lateday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `earlyday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `vacateday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                               `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                               `employee_id` bigint(0) NULL DEFAULT NULL,
+                               `date` date NULL DEFAULT NULL,
+                               `signinday` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                               `lateday` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                               `earlyday` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                               `vacateday` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of attendance
@@ -41,37 +41,38 @@ CREATE TABLE `attendance`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `calendar`;
 CREATE TABLE `calendar`  (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `start` datetime(0) NULL DEFAULT NULL,
-  `end` datetime(0) NULL DEFAULT NULL,
-  `allDay` tinyint(2) NULL DEFAULT NULL,
-  `color` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `className` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `textColor` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                             `id` int(0) NOT NULL AUTO_INCREMENT,
+                             `title` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `start` datetime(0) NULL DEFAULT NULL,
+                             `end` datetime(0) NULL DEFAULT NULL,
+                             `allDay` tinyint(0) NULL DEFAULT NULL,
+                             `color` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `className` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `textColor` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `user_id` bigint(0) NULL DEFAULT NULL,
+                             PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of calendar
 -- ----------------------------
+INSERT INTO `calendar` VALUES (4, '233242', '2026-07-19 16:00:00', '2026-07-21 16:00:00', NULL, 'red', 'done', 'red', NULL);
 
 -- ----------------------------
 -- Table structure for checkin
 -- ----------------------------
 DROP TABLE IF EXISTS `checkin`;
 CREATE TABLE `checkin`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userIP` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `state` tinyint(2) NULL DEFAULT NULL,
-  `signInTime` datetime(0) NULL DEFAULT NULL,
-  `signOutTime` datetime(0) NULL DEFAULT NULL,
-  `checkTime` datetime(0) NULL DEFAULT NULL,
-  `employee_id` bigint(20) NULL DEFAULT NULL,
-  `checkman_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                            `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                            `userIP` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                            `state` tinyint(0) NULL DEFAULT NULL,
+                            `signInTime` datetime(0) NULL DEFAULT NULL,
+                            `signOutTime` datetime(0) NULL DEFAULT NULL,
+                            `checkTime` datetime(0) NULL DEFAULT NULL,
+                            `employee_id` bigint(0) NULL DEFAULT NULL,
+                            `checkman_id` bigint(0) NULL DEFAULT NULL,
+                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of checkin
@@ -82,15 +83,15 @@ CREATE TABLE `checkin`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `clew`;
 CREATE TABLE `clew`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `inputTime` datetime(0) NULL DEFAULT NULL,
-  `state` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                         `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                         `inputTime` datetime(0) NULL DEFAULT NULL,
+                         `state` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `title` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `url` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clew
@@ -101,21 +102,21 @@ CREATE TABLE `clew`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `contract`;
 CREATE TABLE `contract`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sn` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `signTime` datetime(0) NULL DEFAULT NULL,
-  `contractSum` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `money` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `payTime` datetime(0) NULL DEFAULT NULL,
-  `intro` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` tinyint(2) NULL DEFAULT NULL,
-  `file` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `modifyTime` datetime(0) NULL DEFAULT NULL,
-  `customer_id` bigint(20) NULL DEFAULT NULL,
-  `seller_id` bigint(20) NULL DEFAULT NULL,
-  `modifyUser_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                             `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                             `sn` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `signTime` datetime(0) NULL DEFAULT NULL,
+                             `contractSum` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `money` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `payTime` datetime(0) NULL DEFAULT NULL,
+                             `intro` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `status` tinyint(0) NULL DEFAULT NULL,
+                             `file` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `modifyTime` datetime(0) NULL DEFAULT NULL,
+                             `customer_id` bigint(0) NULL DEFAULT NULL,
+                             `seller_id` bigint(0) NULL DEFAULT NULL,
+                             `modifyUser_id` bigint(0) NULL DEFAULT NULL,
+                             PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of contract
@@ -126,70 +127,66 @@ CREATE TABLE `contract`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `age` int(10) NULL DEFAULT NULL,
-  `gender` tinyint(1) NULL DEFAULT NULL,
-  `tel` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `qq` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `wechat` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `job` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '职业',
-  `salaryLevel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收入水平',
-  `customerSource` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户来源，数据字典',
-  `inChargeUser_id` bigint(10) NULL DEFAULT NULL COMMENT '负责人',
-  `inputUser_id` bigint(10) NULL DEFAULT NULL COMMENT '创建人',
-  `inputTime` datetime(0) NULL DEFAULT NULL,
-  `status` tinyint(2) NULL DEFAULT NULL COMMENT '-2:流失，-1:开发失败，0:潜在客户，1:正式客户，2:资源池客户',
-  `becomeTime` datetime(0) NULL DEFAULT NULL COMMENT '转正时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                             `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '编号',
+                             `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `age` int(0) NULL DEFAULT NULL,
+                             `gender` tinyint(1) NULL DEFAULT NULL,
+                             `tel` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `email` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `qq` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `wechat` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `job` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '职业',
+                             `salaryLevel` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '收入水平',
+                             `customerSource` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '客户来源，数据字典',
+                             `inChargeUser_id` bigint(0) NULL DEFAULT NULL COMMENT '负责人',
+                             `inputUser_id` bigint(0) NULL DEFAULT NULL COMMENT '创建人',
+                             `inputTime` datetime(0) NULL DEFAULT NULL,
+                             `status` tinyint(0) NULL DEFAULT NULL COMMENT '-2:流失，-1:开发失败，0:潜在客户，1:正式客户，2:资源池客户',
+                             `becomeTime` datetime(0) NULL DEFAULT NULL COMMENT '转正时间',
+                             PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
-INSERT INTO `customer` VALUES (15, 'test001', 21, 1, '111', '1341@qq.com', '111', '141234', '司机', '4000-8000', '报纸', 26, 26, '2022-02-23 18:24:33', 1, NULL);
-INSERT INTO `customer` VALUES (16, 'lisi', 42, 1, '412412', '4121@qq.com', '412', '414', '司机', '4000-8000', '报纸', 27, 27, '2022-02-23 18:43:11', 0, NULL);
-INSERT INTO `customer` VALUES (17, '松江2', 1241, 1, '41412', '2142@qq.com', '4124', '1412', '教师', '4000-8000', '广播', 26, 26, '2022-02-23 18:48:41', 0, NULL);
 
 -- ----------------------------
 -- Table structure for customerdevplan
 -- ----------------------------
 DROP TABLE IF EXISTS `customerdevplan`;
 CREATE TABLE `customerdevplan`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `planTime` datetime(0) NULL DEFAULT NULL COMMENT '计划时间',
-  `planSubject` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '计划主题',
-  `planType` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '计划实施方式:比如电话,邀约上门',
-  `planDetails` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '计划内容',
-  `traceResult` int(4) NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `customer_id` bigint(20) NULL DEFAULT NULL,
-  `inputTime` datetime(0) NULL DEFAULT NULL,
-  `type` int(4) NULL DEFAULT NULL,
-  `inputUser_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                    `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                    `planTime` datetime(0) NULL DEFAULT NULL COMMENT '计划时间',
+                                    `planSubject` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '计划主题',
+                                    `planType` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '计划实施方式:比如电话,邀约上门',
+                                    `planDetails` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '计划内容',
+                                    `traceResult` int(0) NULL DEFAULT NULL,
+                                    `remark` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                    `customer_id` bigint(0) NULL DEFAULT NULL,
+                                    `inputTime` datetime(0) NULL DEFAULT NULL,
+                                    `type` int(0) NULL DEFAULT NULL,
+                                    `inputUser_id` bigint(0) NULL DEFAULT NULL,
+                                    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customerdevplan
 -- ----------------------------
-INSERT INTO `customerdevplan` VALUES (3, '2022-02-23 00:00:00', '1111', '电话沟通', '1、341423\r\n2、14214\r\n3、答复', 2, '11', 17, '2022-02-23 18:51:57', 0, 26);
 
 -- ----------------------------
 -- Table structure for customertransfer
 -- ----------------------------
 DROP TABLE IF EXISTS `customertransfer`;
 CREATE TABLE `customertransfer`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `customer_id` bigint(20) NULL DEFAULT NULL COMMENT '移交客户id',
-  `transUser_id` bigint(20) NULL DEFAULT NULL COMMENT '移交用户id',
-  `transTime` datetime(0) NULL DEFAULT NULL COMMENT '移交时间',
-  `oldSeller_id` bigint(20) NULL DEFAULT NULL COMMENT '原负责市场专员',
-  `newSeller_id` bigint(20) NULL DEFAULT NULL COMMENT '新负责市场专员',
-  `transReason` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '移交原因',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                     `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                     `customer_id` bigint(0) NULL DEFAULT NULL COMMENT '移交客户id',
+                                     `transUser_id` bigint(0) NULL DEFAULT NULL COMMENT '移交用户id',
+                                     `transTime` datetime(0) NULL DEFAULT NULL COMMENT '移交时间',
+                                     `oldSeller_id` bigint(0) NULL DEFAULT NULL COMMENT '原负责市场专员',
+                                     `newSeller_id` bigint(0) NULL DEFAULT NULL COMMENT '新负责市场专员',
+                                     `transReason` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '移交原因',
+                                     PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customertransfer
@@ -200,20 +197,18 @@ CREATE TABLE `customertransfer`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `department`;
 CREATE TABLE `department`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sn` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部门编号',
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部门名称',
-  `manager_id` bigint(20) NULL DEFAULT NULL COMMENT '部门经理',
-  `parent_id` bigint(20) NULL DEFAULT NULL COMMENT '上级部门',
-  `state` tinyint(1) NULL DEFAULT NULL COMMENT '部门状态0正常 -1停用',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                               `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                               `sn` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '部门编号',
+                               `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '部门名称',
+                               `manager_id` bigint(0) NULL DEFAULT NULL COMMENT '部门经理',
+                               `parent_id` bigint(0) NULL DEFAULT NULL COMMENT '上级部门',
+                               `state` tinyint(1) NULL DEFAULT NULL COMMENT '部门状态0正常 -1停用',
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of department
 -- ----------------------------
-INSERT INTO `department` VALUES (1, '003', '总事办', 16, 4, 1);
-INSERT INTO `department` VALUES (2, '001', '财务部', 7, 1, 1);
 INSERT INTO `department` VALUES (4, '005', '董事会', NULL, NULL, 1);
 INSERT INTO `department` VALUES (7, '007', '人事部', NULL, NULL, 0);
 INSERT INTO `department` VALUES (8, '008', '企划部', NULL, NULL, 0);
@@ -228,64 +223,58 @@ INSERT INTO `department` VALUES (13, 'N013', '测试部', 25, 9, 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '员工账号',
-  `realname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '真实姓名',
-  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `tel` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门',
-  `inputtime` date NULL DEFAULT NULL COMMENT '入职时间',
-  `state` tinyint(1) NULL DEFAULT NULL COMMENT '1正常，0离职',
-  `admin` tinyint(1) NULL DEFAULT NULL COMMENT '1超级管理员 0普通',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `FK_dept`(`dept_id`) USING BTREE,
-  CONSTRAINT `FK_dept` FOREIGN KEY (`dept_id`) REFERENCES `department` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                             `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                             `username` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '员工账号',
+                             `realname` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '真实姓名',
+                             `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `tel` varchar(13) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `email` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                             `dept_id` bigint(0) NULL DEFAULT NULL COMMENT '部门',
+                             `inputtime` date NULL DEFAULT NULL COMMENT '入职时间',
+                             `state` tinyint(1) NULL DEFAULT NULL COMMENT '1正常，0离职',
+                             `admin` tinyint(1) NULL DEFAULT NULL COMMENT '1超级管理员 0普通',
+                             PRIMARY KEY (`id`) USING BTREE,
+                             INDEX `FK_dept`(`dept_id`) USING BTREE,
+                             CONSTRAINT `FK_dept` FOREIGN KEY (`dept_id`) REFERENCES `department` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of employee
 -- ----------------------------
-INSERT INTO `employee` VALUES (1, 'admin', '超级管理员', 'admin', '17839934031', '780798160@qq.com', 4, '2021-06-16', 1, 1);
-INSERT INTO `employee` VALUES (26, 'test', 'test', '000000', '13372553124', '24552121@163.com', 10, '2022-02-23', 1, 0);
-INSERT INTO `employee` VALUES (27, 'test2', 'wangwu', '000000', '1421', '12@qq.com', 10, '2022-02-23', 1, 0);
-INSERT INTO `employee` VALUES (28, 'tt1', 'zhaoliu', '000000', '1412', '412', 10, '2022-02-23', 1, 0);
+INSERT INTO `employee` VALUES (1, 'admin', '超级管理员', '$2$4/kHB3Q4RI6N193p6ExuuA==$XppN7NU2Y7a3lCNoE6zkrZghjRkvsoRLV4EfbvVZ+co=', '17839934031', '780798160@qq.com', 4, '2021-06-16', 1, 1);
 
 -- ----------------------------
 -- Table structure for employee_role
 -- ----------------------------
 DROP TABLE IF EXISTS `employee_role`;
 CREATE TABLE `employee_role`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `e_id` bigint(20) NULL DEFAULT NULL,
-  `r_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `FK_EMPLOYY_M`(`e_id`) USING BTREE,
-  INDEX ` FK_ROLE_M`(`r_id`) USING BTREE,
-  CONSTRAINT ` FK_ROLE_M` FOREIGN KEY (`r_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_EMPLOYY_M` FOREIGN KEY (`e_id`) REFERENCES `employee` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                  `e_id` bigint(0) NULL DEFAULT NULL,
+                                  `r_id` bigint(0) NULL DEFAULT NULL,
+                                  PRIMARY KEY (`id`) USING BTREE,
+                                  INDEX `FK_EMPLOYY_M`(`e_id`) USING BTREE,
+                                  INDEX ` FK_ROLE_M`(`r_id`) USING BTREE,
+                                  CONSTRAINT ` FK_ROLE_M` FOREIGN KEY (`r_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+                                  CONSTRAINT `FK_EMPLOYY_M` FOREIGN KEY (`e_id`) REFERENCES `employee` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of employee_role
 -- ----------------------------
-INSERT INTO `employee_role` VALUES (3, 26, 6);
-INSERT INTO `employee_role` VALUES (4, 27, 6);
-INSERT INTO `employee_role` VALUES (5, 28, 9);
 
 -- ----------------------------
 -- Table structure for guarantee
 -- ----------------------------
 DROP TABLE IF EXISTS `guarantee`;
 CREATE TABLE `guarantee`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sn` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dueTime` datetime(0) NULL DEFAULT NULL,
-  `remark` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `customer_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                              `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                              `sn` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                              `productName` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                              `dueTime` datetime(0) NULL DEFAULT NULL,
+                              `remark` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                              `customer_id` bigint(0) NULL DEFAULT NULL,
+                              PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of guarantee
@@ -296,14 +285,14 @@ CREATE TABLE `guarantee`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `guaranteeitem`;
 CREATE TABLE `guaranteeitem`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `guaranteeTime` datetime(0) NULL DEFAULT NULL,
-  `content` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` tinyint(2) NULL DEFAULT NULL,
-  `cost` int(10) NULL DEFAULT NULL COMMENT '保修费用',
-  `guarantee_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                  `guaranteeTime` datetime(0) NULL DEFAULT NULL,
+                                  `content` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                  `status` tinyint(0) NULL DEFAULT NULL,
+                                  `cost` int(0) NULL DEFAULT NULL COMMENT '保修费用',
+                                  `guarantee_id` bigint(0) NULL DEFAULT NULL,
+                                  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of guaranteeitem
@@ -314,10 +303,10 @@ CREATE TABLE `guaranteeitem`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `know`;
 CREATE TABLE `know`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `context` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                         `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                         `context` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of know
@@ -328,14 +317,14 @@ CREATE TABLE `know`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `knowledgemenu`;
 CREATE TABLE `knowledgemenu`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `text` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `state` tinyint(2) NULL DEFAULT NULL,
-  `checked` tinyint(2) NULL DEFAULT NULL,
-  `attributes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parent_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                  `text` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                  `state` tinyint(0) NULL DEFAULT NULL,
+                                  `checked` tinyint(0) NULL DEFAULT NULL,
+                                  `attributes` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                  `parent_id` bigint(0) NULL DEFAULT NULL,
+                                  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of knowledgemenu
@@ -346,80 +335,45 @@ CREATE TABLE `knowledgemenu`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `opuser_id` bigint(20) NULL DEFAULT NULL,
-  `optime` datetime(0) NULL DEFAULT NULL,
-  `opip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `function` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `params` varchar(10000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                        `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                        `opuser_id` bigint(0) NULL DEFAULT NULL,
+                        `optime` datetime(0) NULL DEFAULT NULL,
+                        `opip` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                        `function` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                        `params` varchar(10000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                        PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of log
 -- ----------------------------
-INSERT INTO `log` VALUES (1, NULL, '2024-09-09 10:19:56', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:getEmployeeForLogin', '{\r\n  \"password\" : \"admin\",\r\n  \"username\" : \"admin\"\r\n}');
-INSERT INTO `log` VALUES (2, 1, '2024-09-09 10:20:10', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryPermissionByEmpId', '{\r\n  \"id\" : 1\r\n}');
-INSERT INTO `log` VALUES (3, 1, '2024-09-09 10:20:21', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.MenuServiceImpl:queryForMenu', '{ }');
-INSERT INTO `log` VALUES (4, NULL, '2024-09-09 13:41:18', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:getEmployeeForLogin', '{\r\n  \"password\" : \"admin\",\r\n  \"username\" : \"admin\"\r\n}');
-INSERT INTO `log` VALUES (5, 1, '2024-09-09 13:42:15', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryPermissionByEmpId', '{\r\n  \"id\" : 1\r\n}');
-INSERT INTO `log` VALUES (6, 1, '2024-09-09 13:42:21', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.MenuServiceImpl:queryForMenu', '{ }');
-INSERT INTO `log` VALUES (7, NULL, '2024-09-09 14:23:55', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:getEmployeeForLogin', '{\r\n  \"password\" : \"admin\",\r\n  \"username\" : \"admin\"\r\n}');
-INSERT INTO `log` VALUES (8, 1, '2024-09-09 14:24:21', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryPermissionByEmpId', '{\r\n  \"id\" : 1\r\n}');
-INSERT INTO `log` VALUES (9, 1, '2024-09-09 14:24:33', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.MenuServiceImpl:queryForMenu', '{ }');
-INSERT INTO `log` VALUES (10, NULL, '2024-09-09 23:21:16', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:getEmployeeForLogin', '{\r\n  \"password\" : \"admin\",\r\n  \"username\" : \"admin\"\r\n}');
-INSERT INTO `log` VALUES (11, 1, '2024-09-09 23:21:20', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryPermissionByEmpId', '{\r\n  \"id\" : 1\r\n}');
-INSERT INTO `log` VALUES (12, 1, '2024-09-09 23:21:20', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.MenuServiceImpl:queryForMenu', '{ }');
-INSERT INTO `log` VALUES (13, 1, '2024-09-09 23:25:55', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:getEmployeeForLogin', '{\r\n  \"password\" : \"admin\",\r\n  \"username\" : \"admin\"\r\n}');
-INSERT INTO `log` VALUES (14, 1, '2024-09-09 23:25:55', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryPermissionByEmpId', '{\r\n  \"id\" : 1\r\n}');
-INSERT INTO `log` VALUES (15, 1, '2024-09-09 23:25:55', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.MenuServiceImpl:queryForMenu', '{ }');
-INSERT INTO `log` VALUES (16, NULL, '2024-09-09 23:26:57', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:getEmployeeForLogin', '{\r\n  \"password\" : \"admin\",\r\n  \"username\" : \"admin\"\r\n}');
-INSERT INTO `log` VALUES (17, 1, '2024-09-09 23:27:02', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryPermissionByEmpId', '{\r\n  \"id\" : 1\r\n}');
-INSERT INTO `log` VALUES (18, 1, '2024-09-09 23:27:06', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.MenuServiceImpl:queryForMenu', '{ }');
-INSERT INTO `log` VALUES (19, 1, '2024-09-09 23:27:32', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.RoleServiceImpl:queryForEmp', '{ }');
-INSERT INTO `log` VALUES (20, 1, '2024-09-09 23:27:32', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.DepartmentServiceImpl:queryForEmp', '{ }');
-INSERT INTO `log` VALUES (21, 1, '2024-09-09 23:27:33', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"keyword\" : null,\r\n    \"start\" : 0\r\n  }\r\n}');
-INSERT INTO `log` VALUES (22, 1, '2024-09-09 23:27:37', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.RoleServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"keyword\" : null,\r\n    \"start\" : 0\r\n  }\r\n}');
-INSERT INTO `log` VALUES (23, 1, '2024-09-09 23:27:37', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 0\r\n  }\r\n}');
-INSERT INTO `log` VALUES (24, 1, '2024-09-09 23:27:38', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"keyword\" : null,\r\n    \"start\" : 0\r\n  }\r\n}');
-INSERT INTO `log` VALUES (25, 1, '2024-09-09 23:27:38', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.DepartmentServiceImpl:queryForPage', '{\r\n  \"qo\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"keyword\" : null,\r\n    \"state\" : null,\r\n    \"start\" : 0\r\n  }\r\n}');
-INSERT INTO `log` VALUES (26, 1, '2024-09-09 23:27:56', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : null,\r\n    \"rows\" : null,\r\n    \"rid\" : 1,\r\n    \"start\" : 0\r\n  }\r\n}');
-INSERT INTO `log` VALUES (27, 1, '2024-09-09 23:28:06', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 2,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 10\r\n  }\r\n}');
-INSERT INTO `log` VALUES (28, 1, '2024-09-09 23:28:07', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 3,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 20\r\n  }\r\n}');
-INSERT INTO `log` VALUES (29, 1, '2024-09-09 23:28:08', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 4,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 30\r\n  }\r\n}');
-INSERT INTO `log` VALUES (30, 1, '2024-09-09 23:28:08', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 5,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 40\r\n  }\r\n}');
-INSERT INTO `log` VALUES (31, 1, '2024-09-09 23:28:09', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 6,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 50\r\n  }\r\n}');
-INSERT INTO `log` VALUES (32, 1, '2024-09-09 23:28:09', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 7,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 60\r\n  }\r\n}');
-INSERT INTO `log` VALUES (33, 1, '2024-09-09 23:28:10', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 8,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 70\r\n  }\r\n}');
-INSERT INTO `log` VALUES (34, 1, '2024-09-09 23:28:10', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 9,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 80\r\n  }\r\n}');
-INSERT INTO `log` VALUES (35, 1, '2024-09-09 23:28:11', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 10,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 90\r\n  }\r\n}');
-INSERT INTO `log` VALUES (36, 1, '2024-09-09 23:28:11', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 11,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 100\r\n  }\r\n}');
-INSERT INTO `log` VALUES (37, 1, '2024-09-09 23:28:11', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"queryObject\" : {\r\n    \"page\" : 12,\r\n    \"rows\" : 10,\r\n    \"rid\" : null,\r\n    \"start\" : 110\r\n  }\r\n}');
-INSERT INTO `log` VALUES (38, 1, '2024-09-09 23:28:51', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.CustomerTransferServiceImpl:list', '{\r\n  \"qo\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"customername\" : null,\r\n    \"begintime\" : null,\r\n    \"endtime\" : null,\r\n    \"start\" : 0\r\n  }\r\n}');
-INSERT INTO `log` VALUES (39, 1, '2024-09-09 23:28:51', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:queryEmployeeByRole', '{ }');
-INSERT INTO `log` VALUES (41, 1, '2024-09-09 23:28:57', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.SystemDictionaryItemServiceImpl:queryDicItem', '{\r\n  \"id\" : 1\r\n}');
-INSERT INTO `log` VALUES (42, 1, '2024-09-09 23:28:57', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.SystemDictionaryItemServiceImpl:queryDicItem', '{\r\n  \"id\" : 2\r\n}');
-INSERT INTO `log` VALUES (43, 1, '2024-09-09 23:28:57', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.SystemDictionaryItemServiceImpl:queryDicItem', '{\r\n  \"id\" : 3\r\n}');
-INSERT INTO `log` VALUES (44, 1, '2024-09-09 23:28:57', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.EmployeeServiceImpl:queryEmployeeByRole', '{ }');
-INSERT INTO `log` VALUES (45, 1, '2024-09-09 23:28:57', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.CustomerServiceImpl:queryForPage', '{\r\n  \"qo\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"userid\" : null,\r\n    \"keyword\" : null,\r\n    \"status\" : null,\r\n    \"start\" : 0\r\n  }\r\n}');
+INSERT INTO `log` VALUES (154, 1, '2026-07-19 14:16:13', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.PermissionServiceImpl:queryForPage', '{\r\n  \"pageReq\" : {\r\n    \"rid\" : 6,\r\n    \"start\" : 0\r\n  }\r\n}');
+INSERT INTO `log` VALUES (155, 1, '2026-07-19 14:16:35', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.AttendanceServiceImpl:queryByCondition', '{\r\n  \"qo\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"state\" : 0,\r\n    \"start\" : 0\r\n  }\r\n}');
+INSERT INTO `log` VALUES (156, 1, '2026-07-19 14:16:36', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.CheckInServiceImpl:queryByCondition', '{\r\n  \"qo\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"state\" : 0,\r\n    \"start\" : 0\r\n  }\r\n}');
+INSERT INTO `log` VALUES (157, 1, '2026-07-19 14:16:38', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.VacateServiceImpl:queryByCondition', '{\r\n  \"qo\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"state\" : -1,\r\n    \"start\" : 0\r\n  }\r\n}');
+INSERT INTO `log` VALUES (158, 1, '2026-07-19 14:16:39', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.SalaryServiceImpl:listAll', '{ }');
+INSERT INTO `log` VALUES (159, 1, '2026-07-19 14:16:39', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.SalaryServiceImpl:queryByCondition', '{\r\n  \"qo\" : {\r\n    \"page\" : 1,\r\n    \"rows\" : 10,\r\n    \"start\" : 0\r\n  }\r\n}');
+INSERT INTO `log` VALUES (160, 1, '2026-07-19 14:16:49', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.CalendarServiceImpl:selectAll', '{ }');
+INSERT INTO `log` VALUES (161, 1, '2026-07-19 14:17:09', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.CalendarServiceImpl:insert', '{\r\n  \"record\" : {\r\n    \"id\" : 4,\r\n    \"title\" : \"233242\",\r\n    \"start\" : \"2026-07-20\",\r\n    \"end\" : \"2026-07-22\",\r\n    \"color\" : \"red\",\r\n    \"className\" : \"done\",\r\n    \"textColor\" : \"red\"\r\n  }\r\n}');
+INSERT INTO `log` VALUES (162, 1, '2026-07-19 14:17:09', '0:0:0:0:0:0:0:1', 'com._520it.crm.service.impl.CalendarServiceImpl:selectAll', '{ }');
 
 -- ----------------------------
 -- Table structure for menu
 -- ----------------------------
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `text` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单名称',
-  `iconCls` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
-  `checked` tinyint(1) NULL DEFAULT NULL,
-  `state` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否展开菜单',
-  `attributes` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parent_id` bigint(20) NULL DEFAULT NULL COMMENT '当前菜单的父节点',
-  `function` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用来判断是否有该菜单的访问权限',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `FK_PARENT`(`parent_id`) USING BTREE,
-  CONSTRAINT `FK_PARENT` FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                         `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                         `text` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '菜单名称',
+                         `iconCls` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
+                         `checked` tinyint(1) NULL DEFAULT NULL,
+                         `state` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否展开菜单',
+                         `attributes` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `parent_id` bigint(0) NULL DEFAULT NULL COMMENT '当前菜单的父节点',
+                         `function` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用来判断是否有该菜单的访问权限',
+                         PRIMARY KEY (`id`) USING BTREE,
+                         INDEX `FK_PARENT`(`parent_id`) USING BTREE,
+                         CONSTRAINT `FK_PARENT` FOREIGN KEY (`parent_id`) REFERENCES `menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
@@ -436,7 +390,7 @@ INSERT INTO `menu` VALUES (9, '知识库', NULL, NULL, NULL, '{\"url\":\"/knowle
 INSERT INTO `menu` VALUES (10, '客户线索', NULL, NULL, NULL, '{\"url\":\"/clew\"}', 6, 'com._520it.crm.web.controller.ClewController:index');
 INSERT INTO `menu` VALUES (11, '日历', NULL, NULL, NULL, '{\"url\":\"/calendar\"}', 6, 'com._520it.crm.web.controller.CalendarController:index');
 INSERT INTO `menu` VALUES (12, '营销管理', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `menu` VALUES (13, '潜在客户管理', NULL, NULL, NULL, '{\"url\":\"/potentialCustomer\"}', 12, 'com._520it.crm.web.controller.PotentialCustomerController:index');
+INSERT INTO `menu` VALUES (13, '潜在客户管理', NULL, NULL, NULL, '{\"url\":\"/customerPotential\"}', 12, 'com._520it.crm.web.controller.PotentialCustomerController:index');
 INSERT INTO `menu` VALUES (14, '客户信息管理', NULL, NULL, NULL, '{\"url\":\"/customer\"}', 12, 'com._520it.crm.web.controller.CustomerController:index');
 INSERT INTO `menu` VALUES (15, '客户移交记录', NULL, NULL, NULL, '{\"url\":\"/customerTransfer\"}', 12, 'com._520it.crm.web.controller.CustomerTransferController:index');
 INSERT INTO `menu` VALUES (16, '潜在客户开发计划', NULL, NULL, NULL, '{\"url\":\"/potentialCustomerDevPlan\"}', 12, 'com._520it.crm.web.controller.PontentialCustomerDevPlanController:index');
@@ -462,17 +416,17 @@ INSERT INTO `menu` VALUES (33, '客户移交记录', NULL, NULL, NULL, '{\"url\"
 -- ----------------------------
 DROP TABLE IF EXISTS `networkdisk`;
 CREATE TABLE `networkdisk`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `path` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dir` tinyint(2) NULL DEFAULT NULL,
-  `uploadTime` datetime(0) NULL DEFAULT NULL,
-  `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `pub` tinyint(2) NULL DEFAULT NULL,
-  `parent_id` bigint(20) NULL DEFAULT NULL,
-  `user_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                `path` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                `dir` tinyint(0) NULL DEFAULT NULL,
+                                `uploadTime` datetime(0) NULL DEFAULT NULL,
+                                `type` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                `pub` tinyint(0) NULL DEFAULT NULL,
+                                `parent_id` bigint(0) NULL DEFAULT NULL,
+                                `user_id` bigint(0) NULL DEFAULT NULL,
+                                PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of networkdisk
@@ -483,20 +437,20 @@ CREATE TABLE `networkdisk`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `orderbill`;
 CREATE TABLE `orderbill`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `signTime` datetime(0) NULL DEFAULT NULL,
-  `totalSum` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `bargainMoney` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `intro` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `file` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `createTime` datetime(0) NULL DEFAULT NULL,
-  `modifyTime` datetime(0) NULL DEFAULT NULL,
-  `status` tinyint(2) NULL DEFAULT NULL,
-  `customer_id` bigint(20) NULL DEFAULT NULL,
-  `seller_id` bigint(20) NULL DEFAULT NULL,
-  `modifyUser_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                              `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                              `signTime` datetime(0) NULL DEFAULT NULL,
+                              `totalSum` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                              `bargainMoney` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                              `intro` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                              `file` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                              `createTime` datetime(0) NULL DEFAULT NULL,
+                              `modifyTime` datetime(0) NULL DEFAULT NULL,
+                              `status` tinyint(0) NULL DEFAULT NULL,
+                              `customer_id` bigint(0) NULL DEFAULT NULL,
+                              `seller_id` bigint(0) NULL DEFAULT NULL,
+                              `modifyUser_id` bigint(0) NULL DEFAULT NULL,
+                              PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orderbill
@@ -507,11 +461,11 @@ CREATE TABLE `orderbill`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `permission`;
 CREATE TABLE `permission`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `resource` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 117 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                               `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                               `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                               `resource` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 117 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of permission
@@ -638,83 +592,46 @@ INSERT INTO `permission` VALUES (116, '客户移交新增', 'com._520it.crm.web.
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sn` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                         `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                         `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `sn` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES (1, '人事专员', 'HR');
-INSERT INTO `role` VALUES (6, '市场专员', 'MS');
-INSERT INTO `role` VALUES (9, '销售主管', 'XRZG');
 
 -- ----------------------------
 -- Table structure for role_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `role_permission`;
 CREATE TABLE `role_permission`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `r_id` bigint(20) NULL DEFAULT NULL,
-  `p_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `FK_PERMISSION`(`p_id`) USING BTREE,
-  INDEX `FK_ROLE`(`r_id`) USING BTREE,
-  CONSTRAINT `FK_PERMISSION` FOREIGN KEY (`p_id`) REFERENCES `permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_ROLE` FOREIGN KEY (`r_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                    `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                    `r_id` bigint(0) NULL DEFAULT NULL,
+                                    `p_id` bigint(0) NULL DEFAULT NULL,
+                                    PRIMARY KEY (`id`) USING BTREE,
+                                    INDEX `FK_PERMISSION`(`p_id`) USING BTREE,
+                                    INDEX `FK_ROLE`(`r_id`) USING BTREE,
+                                    CONSTRAINT `FK_PERMISSION` FOREIGN KEY (`p_id`) REFERENCES `permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+                                    CONSTRAINT `FK_ROLE` FOREIGN KEY (`r_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_permission
 -- ----------------------------
-INSERT INTO `role_permission` VALUES (49, 6, 23);
-INSERT INTO `role_permission` VALUES (50, 6, 24);
-INSERT INTO `role_permission` VALUES (51, 6, 25);
-INSERT INTO `role_permission` VALUES (52, 6, 26);
-INSERT INTO `role_permission` VALUES (53, 6, 27);
-INSERT INTO `role_permission` VALUES (54, 6, 28);
-INSERT INTO `role_permission` VALUES (55, 6, 29);
-INSERT INTO `role_permission` VALUES (56, 6, 31);
-INSERT INTO `role_permission` VALUES (57, 6, 32);
-INSERT INTO `role_permission` VALUES (58, 6, 33);
-INSERT INTO `role_permission` VALUES (59, 6, 34);
-INSERT INTO `role_permission` VALUES (60, 6, 35);
-INSERT INTO `role_permission` VALUES (61, 6, 36);
-INSERT INTO `role_permission` VALUES (62, 6, 37);
-INSERT INTO `role_permission` VALUES (63, 6, 38);
-INSERT INTO `role_permission` VALUES (64, 6, 40);
-INSERT INTO `role_permission` VALUES (65, 6, 41);
-INSERT INTO `role_permission` VALUES (66, 6, 42);
-INSERT INTO `role_permission` VALUES (67, 6, 43);
-INSERT INTO `role_permission` VALUES (68, 6, 44);
-INSERT INTO `role_permission` VALUES (69, 6, 46);
-INSERT INTO `role_permission` VALUES (70, 6, 47);
-INSERT INTO `role_permission` VALUES (71, 6, 48);
-INSERT INTO `role_permission` VALUES (72, 6, 49);
-INSERT INTO `role_permission` VALUES (73, 6, 50);
-INSERT INTO `role_permission` VALUES (74, 6, 52);
-INSERT INTO `role_permission` VALUES (75, 6, 53);
-INSERT INTO `role_permission` VALUES (76, 6, 56);
-INSERT INTO `role_permission` VALUES (77, 9, 22);
-INSERT INTO `role_permission` VALUES (78, 9, 30);
-INSERT INTO `role_permission` VALUES (79, 9, 39);
-INSERT INTO `role_permission` VALUES (80, 9, 45);
-INSERT INTO `role_permission` VALUES (81, 9, 51);
-INSERT INTO `role_permission` VALUES (82, 9, 113);
 
 -- ----------------------------
 -- Table structure for salary
 -- ----------------------------
 DROP TABLE IF EXISTS `salary`;
 CREATE TABLE `salary`  (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `salary` decimal(10, 2) NULL DEFAULT NULL,
-  `date` datetime(0) NULL DEFAULT NULL,
-  `employee_id` tinyint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                           `id` int(0) NOT NULL AUTO_INCREMENT,
+                           `salary` decimal(10, 2) NULL DEFAULT NULL,
+                           `date` datetime(0) NULL DEFAULT NULL,
+                           `employee_id` tinyint(0) NULL DEFAULT NULL,
+                           PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of salary
@@ -725,12 +642,12 @@ CREATE TABLE `salary`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `systemdictionary`;
 CREATE TABLE `systemdictionary`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sn` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `intro` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                     `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                     `sn` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                     `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                     `intro` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                     PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of systemdictionary
@@ -745,15 +662,15 @@ INSERT INTO `systemdictionary` VALUES (4, 'plantype', '实施方式', NULL);
 -- ----------------------------
 DROP TABLE IF EXISTS `systemdictionaryitem`;
 CREATE TABLE `systemdictionaryitem`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `intro` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parent_id` bigint(20) NULL DEFAULT NULL,
-  `state` tinyint(1) NULL DEFAULT NULL COMMENT '字典明细是否禁用',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `FK_SD`(`parent_id`) USING BTREE,
-  CONSTRAINT `FK_SD` FOREIGN KEY (`parent_id`) REFERENCES `systemdictionary` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                                         `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                         `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                         `intro` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                                         `parent_id` bigint(0) NULL DEFAULT NULL,
+                                         `state` tinyint(1) NULL DEFAULT NULL COMMENT '字典明细是否禁用',
+                                         PRIMARY KEY (`id`) USING BTREE,
+                                         INDEX `FK_SD`(`parent_id`) USING BTREE,
+                                         CONSTRAINT `FK_SD` FOREIGN KEY (`parent_id`) REFERENCES `systemdictionary` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of systemdictionaryitem
@@ -787,17 +704,17 @@ INSERT INTO `systemdictionaryitem` VALUES (34, '邀约上门', '', 4, 0);
 -- ----------------------------
 DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task`  (
-  `id` tinyint(20) NOT NULL AUTO_INCREMENT,
-  `start` datetime(0) NULL DEFAULT NULL,
-  `endTime` datetime(0) NULL DEFAULT NULL,
-  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `remark` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `mintaskdescribe` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `minhandledescribe` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` tinyint(2) NULL DEFAULT NULL,
-  `handleUser` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                         `id` tinyint(0) NOT NULL AUTO_INCREMENT,
+                         `start` datetime(0) NULL DEFAULT NULL,
+                         `endTime` datetime(0) NULL DEFAULT NULL,
+                         `title` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `remark` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `mintaskdescribe` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `minhandledescribe` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+                         `status` tinyint(0) NULL DEFAULT NULL,
+                         `handleUser` bigint(0) NULL DEFAULT NULL,
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of task
@@ -808,15 +725,15 @@ CREATE TABLE `task`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `vacate`;
 CREATE TABLE `vacate`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `begintime` datetime(0) NULL DEFAULT NULL,
-  `endtime` datetime(0) NULL DEFAULT NULL,
-  `audittime` datetime(0) NULL DEFAULT NULL,
-  `employee_id` bigint(20) NULL DEFAULT NULL,
-  `audit_id` bigint(20) NULL DEFAULT NULL,
-  `state` tinyint(2) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+                           `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                           `begintime` datetime(0) NULL DEFAULT NULL,
+                           `endtime` datetime(0) NULL DEFAULT NULL,
+                           `audittime` datetime(0) NULL DEFAULT NULL,
+                           `employee_id` bigint(0) NULL DEFAULT NULL,
+                           `audit_id` bigint(0) NULL DEFAULT NULL,
+                           `state` tinyint(0) NULL DEFAULT NULL,
+                           PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of vacate
