@@ -15,6 +15,11 @@ import java.util.List;
 @Controller
 public class IndexController {
 
+    @RequestMapping("/")
+    public String root() {
+        return "redirect:/index";
+    }
+
     @RequestMapping("/index")
     public String index() {
         return "index";
