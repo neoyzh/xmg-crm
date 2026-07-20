@@ -35,7 +35,9 @@
 
 ## 启动
 
-1. 使用idea运行，Configurations中新增一个maven配置，在run中填入tomcat7:run，或在右侧的maven窗口中选中tomcat7:run
+1. 使用idea启动
+   a. 方式一启动：Configurations中新增一个maven配置，在run中填入tomcat7:run，或在右侧的maven窗口中选中tomcat7:run
+   b. 方式二启动：`mvn -DskipTests jetty:run`
 2. 浏览器访问：http://localhost:9527/ ，访问：admin/admin
 
 ## 权限设计

@@ -27,7 +27,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.6</version>
+            <version>1.18.46</version>
+            <scope>provided</scope>
         </dependency>
         <!-- servlet-api -->
         <dependency>
@@ -292,17 +293,33 @@
                 </configuration>
             </plugin>
             <!-- 添加一个tomcat插件 -->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <!-- tomcat启动的端口 -->
+                    &lt;!&ndash; tomcat启动的端口 &ndash;&gt;
                     <port>9527</port>
-                    <!-- 应用的上下文路径 -->
+                    &lt;!&ndash; 应用的上下文路径 &ndash;&gt;
                     <path>/</path>
                 </configuration>
+            </plugin>-->
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.54.v20240208</version>
+                <configuration>
+                    <httpConnector>
+                        <port>9527</port>
+                    </httpConnector>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                </configuration>
             </plugin>
+
         </plugins>
 
         <!--解决xml无法编译到classes的问题-->
